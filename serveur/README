@@ -1,3 +1,9 @@
+// Lance le programme
+./run.bat
+// Supprime les fichiers class chiant
+./del_class.bat
+
+
 // ----------- GENERATION DE LA MAP -----------
 
 // Crée la map et et la json des obstacles
