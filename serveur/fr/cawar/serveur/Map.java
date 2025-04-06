@@ -13,6 +13,10 @@ public class Map {
         this.length = Constants.unitInChunk * Constants.nbChunk;
         this.mapData = new int[this.length][this.length];
     }
+
+    public int getLenght() {
+        return this.length;
+    }
     
 
     // Génération de la map et des listes d'obstacles

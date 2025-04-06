@@ -3,7 +3,7 @@ package fr.cawar.serveur;
 
 public class Constants {
     /* ----- MAP ----- */
-    public static final int nbChunk = 100; // Nombre de chunk sur une ligne
+    public static final int nbChunk = 3; // Nombre de chunk sur une ligne
     public static final float unit = 1;
     public static final int unitInChunk = 10;
     public static final float lengthMap = unit * unitInChunk * nbChunk;

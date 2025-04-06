@@ -123,6 +123,27 @@ public class JsonWriter {
         return jsonBuilder.toString();
     }
 
+    public List<KeyTimePair> jsonToKeyTimePairList(String json) {
+        List<KeyTimePair> list = new ArrayList<>();
+
+        // Suppression des crochets et des espaces inutiles
+        json = json.replaceAll("[\\[\\]\\s]", "");
+
+        // Séparation des paires clé-valeur
+        String[] pairs = json.split(",");
+
+        for (String pair : pairs) {
+            String[] keyValue = pair.split(":");
+            if (keyValue.length == 2) {
+                String key = keyValue[0].replace("\"", "");
+                double time = Double.parseDouble(keyValue[1]);
+                list.add(new KeyTimePair(key, time));
+            }
+        }
+
+        return list;
+    }
+
     public static void main(String[] args) {
         // Exemple de tanks
         JsonWriter jsonWriter = new JsonWriter();

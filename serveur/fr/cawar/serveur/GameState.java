@@ -88,7 +88,7 @@ public class GameState {
                 // Position atomique du tank
                 Coordinate atomPosT = T.getAtomPos();
                 // Angle atomique du tank
-                long atomAngleT = T.getAtomAngle();
+                double atomAngleT = T.getAtomAngle();
                 
                 // COLISIONS
 

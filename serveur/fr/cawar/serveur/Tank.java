@@ -79,17 +79,17 @@ public class Tank {
         return this.atomPos.getCoordinate() ;
     }
 
-    public long getAtomAngle() {
+    public double getAtomAngle() {
         return this.atomAngle.getAngle() ;
     }
 
-    public long getAtomHp() {
+    public double getAtomHp() {
         return this.atomHp.getAngle() ;
     }
 
     public int gotShoot() {
-        long currentHealth = this.atomHp.getAngle(); // Obtient la valeur stoquer dans un long
-        long newHealth = currentHealth - Constants.damageBullet;
+        double currentHealth = this.atomHp.getAngle(); // Obtient la valeur stoquer dans un long
+        double newHealth = currentHealth - Constants.damageBullet;
         this.atomHp.setAngle(newHealth);
         return (int) newHealth; // Return the new health value
     }
@@ -97,7 +97,7 @@ public class Tank {
 
 
     public void updateAtomic() {
-        this.atomAngle.setAngle((long) this.angle);
+        this.atomAngle.setAngle((double) this.angle);
         this.atomPos.setCoordinate(this.position) ;
     }
 

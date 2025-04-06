@@ -20,6 +20,14 @@ public class Test implements KeyListener {
         this.jsonPrinted = false; // Initialisation de l'état d'impression du JSON
     }
 
+    public List<KeyTimePair> getKeyTimePairs() {
+        return keyTimePairs;
+    }
+
+    public HashSet<String> getPressedKeys() {
+        return pressedKeys;
+    }
+
     public void startKeyListener() {
         JFrame frame = new JFrame("Test KeyListener");
         frame.addKeyListener(this);
@@ -31,7 +39,7 @@ public class Test implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         String key = KeyEvent.getKeyText(e.getKeyCode());
-        // double currentTime = System.currentTimeMillis();
+        System.out.println("Key pressed: " + key); // Debug: Log key press
 
         // Ajoute la touche à la liste si elle n'est pas déjà pressée
         if (!pressedKeys.contains(key)) {
@@ -47,6 +55,7 @@ public class Test implements KeyListener {
             } else if (key.equals(Constants.shoot)) {
                 keyTimePairs.add(new KeyTimePair(Constants.shoot, 0));
             } else if (key.equals("P")) { // Touche pour simuler la nouvelle position
+                System.out.println("Key 'P' detected."); // Debug: Log "P" key detection
                 simulateTankMovement();
             }
 
@@ -70,7 +79,14 @@ public class Test implements KeyListener {
         System.out.println("------------------Position------------------");
         // Affiche la nouvelle position du tank
         System.out.println("Nouvelle position du tank "+ tank.getId()+" : " + tank.getPosition());
+        System.out.println("Nouvelle angle du tank : " + tank.getAngle() * 180 / Math.PI + "°");
         System.out.println("Nouvelle angle du tank : " + tank.getAngle());
+
+        tank.updateAtomic();
+
+        System.out.println("Position Atomique "+ tank.getId()+" : " + tank.getAtomPos());
+        System.out.println("Angle Atomique : " + tank.getAtomAngle() * 180 / Math.PI + "°");
+        System.out.println("Angle Atomique " + tank.getAtomAngle());
 
         System.out.println("------------------Balles------------------");
         for(Bullet b : tank.getBulletList()) {

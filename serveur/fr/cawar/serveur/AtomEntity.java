@@ -13,8 +13,9 @@ public class AtomEntity {
 
     // Constructeur pour l'angle
     public AtomEntity(double angle) {
-        this.coord = new AtomicLong((long) angle);
+        this.coord = new AtomicLong(Double.doubleToRawLongBits(angle)); // Encode l'angle en long
     }
+
 
 
     // Méthode pour modifier la coordonnée
@@ -28,13 +29,17 @@ public class AtomEntity {
         return decode(value);
     }
 
-    public void setAngle(long phi){
-        coord.set(phi) ;
+
+    // Méthode pour définir l'angle
+    public void setAngle(double phi) {
+        this.coord.set(Double.doubleToRawLongBits(phi)); // Encode le double en long
     }
 
-    public long getAngle() {
-        return coord.get() ;
+    // Méthode pour obtenir l'angle
+    public double getAngle() {
+        return Double.longBitsToDouble(coord.get()); // Décode le long en double
     }
+
 
     // Méthode privée pour encoder deux floats dans un long
     private static long encode(float x, float y) {
