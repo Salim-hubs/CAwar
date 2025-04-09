@@ -33,6 +33,7 @@ public class GameState {
 
     // Processus de simulation du jeu
     public String process(Tank T0, ArrayList<KeyTimePair> key_time) {
+        System.out.println("Début processus de simulation du jeu pour le tank ID: " + T0.getId());
         // JSON
         JsonWriter json = new JsonWriter();        
 
@@ -82,6 +83,18 @@ public class GameState {
             }
         }
 
+
+
+        // // Ajout des obstacles a afficher
+        // ArrayList<Integer> neighboorChunk = Constants.getNeighbours(chunkTank); // Récupère la liste des obstacles du chunk    
+        // for (int chunk : neighboorChunk) {
+        //     ArrayList<Coordinate> chunkObList = this.obstacleMap.get(chunk); // Récupère la liste des obstacles du chunk
+        //     if (chunkObList != null) {
+        //         json.addChunkObstacles(chunkObList); // Ajout des obstacles du chunk au JSON
+        //     }
+        // }
+        
+
         // Pour chaque tank
         for (Tank T : this.tankList) {
             if (T != T0){ // Ne pas comparer avec soi-même
@@ -127,7 +140,6 @@ public class GameState {
                 }
 
                 
-                
             }
         }
 
@@ -143,7 +155,9 @@ public class GameState {
 
         json.addTank(T0.getId(), T0.getPosition(), T0.getAngle()); // Ajout des données du tank T0 au JSON
 
-        return json.toJson(); // Retourne le JSON généré   
+        String jsonOutput = json.toJson(); // Retourne le JSON généré
+        System.out.println("JSON généré dans GameState : " + jsonOutput); // Debug: Affiche le JSON généré
+        return jsonOutput;
     }
 }
 

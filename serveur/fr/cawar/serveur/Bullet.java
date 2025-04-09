@@ -64,7 +64,7 @@ public class Bullet {
     }
 
     public boolean isValid() { // Retourne vrai si la balle est valid
-        return this.timeWhenThrown > 0 ;
+        return this.timeWhenThrown <= 0 ;
     }
 
     public static void main(String[] args) throws InterruptedException  {

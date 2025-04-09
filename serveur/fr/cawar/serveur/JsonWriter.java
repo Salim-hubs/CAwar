@@ -7,11 +7,13 @@ import java.util.List;
 public class JsonWriter {
     private List<TankDisplay> tanks;
     private List<BulletDisplay> bullets;
+    private List<BulletDisplay> obstacles; // Liste des obstacles (pour le moment, on les traite comme des balles)
 
     // Constructeurs, getters et setters
     public JsonWriter() {
         this.tanks = new ArrayList<>();
         this.bullets = new ArrayList<>();
+        this.obstacles = new ArrayList<>(); // Initialisation de la liste des obstacles
     }
 
     public List<TankDisplay> getTanks() {
@@ -31,6 +33,19 @@ public class JsonWriter {
         BulletDisplay bullet = new BulletDisplay(position);
         this.bullets.add(bullet);
     }
+
+    public void addChunkObstacles(ArrayList<Coordinate> chunkObList) {
+        // Ajoute les obstacles d'un chunk à la liste des obstacles
+        for (Coordinate coord : chunkObList) {
+            BulletDisplay obstacle = new BulletDisplay(coord);
+            this.obstacles.add(obstacle);
+        }
+    }
+
+    public List<BulletDisplay> getObstacles() {
+        return obstacles;
+    }
+
     
     // Méthode pour convertir l'objet en JSON
     public String toJson() {
@@ -45,7 +60,7 @@ public class JsonWriter {
                 "{\"id\": %d, \"position\": {\"x\": %.2f, \"y\": %.2f}, \"angle\": %.2f}",
                 tank.getId(), tank.getPosition().getX(), tank.getPosition().getY(), tank.getAngle()
             ));
-            if (i < tanks.size() - 1) {
+            if (i < tanks.size() - 1) { // Pas de virgule après le dernier élément
                 jsonBuilder.append(",");
             }
         }
@@ -59,11 +74,25 @@ public class JsonWriter {
                 "{\"position\": {\"x\": %.2f, \"y\": %.2f}}",
                 bullet.getPosition().getX(), bullet.getPosition().getY()
             ));
-            if (i < bullets.size() - 1) {
+            if (i < bullets.size() - 1) { // Pas de virgule après le dernier élément
                 jsonBuilder.append(",");
             }
         }
-        jsonBuilder.append("]");
+        jsonBuilder.append("],");
+
+        // Ajouter les obstacles
+        jsonBuilder.append("\"obstacles\": [");
+        for (int i = 0; i < obstacles.size(); i++) {
+            BulletDisplay obstacle = obstacles.get(i);
+            jsonBuilder.append(String.format(
+                "{\"position\": {\"x\": %.2f, \"y\": %.2f}}",
+                obstacle.getPosition().getX(), obstacle.getPosition().getY()
+            ));
+            if (i < obstacles.size() - 1) { // pas de virgule après le dernier
+                jsonBuilder.append(",");
+            }
+        }
+        jsonBuilder.append("]"); // FIN des obstacles
 
         jsonBuilder.append("}");
         return jsonBuilder.toString();
@@ -91,7 +120,7 @@ public class JsonWriter {
 
     
 
-    public String hashMapToJson(HashMap<Integer, ArrayList<Coordinate>> map) {
+    public static String hashMapToJson(HashMap<Integer, ArrayList<Coordinate>> map) {
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{");
 
@@ -123,8 +152,8 @@ public class JsonWriter {
         return jsonBuilder.toString();
     }
 
-    public List<KeyTimePair> jsonToKeyTimePairList(String json) {
-        List<KeyTimePair> list = new ArrayList<>();
+    public static ArrayList<KeyTimePair> jsonToKeyTimePairList(String json) {
+        ArrayList<KeyTimePair> list = new ArrayList<>();
 
         // Suppression des crochets et des espaces inutiles
         json = json.replaceAll("[\\[\\]\\s]", "");

@@ -44,7 +44,7 @@ public class Tank {
 
     public void handleBulletExpiration() {
         for (Bullet b : atomBullet) {
-            if(b.getTimeWhenThrown() <= 0) {
+            if(b.isValid()) {
                 this.deleteBullet(b); // Supprime la balle si le temps est écoulé
             }
         }

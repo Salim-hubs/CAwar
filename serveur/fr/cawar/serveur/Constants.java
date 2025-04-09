@@ -1,9 +1,15 @@
 package fr.cawar.serveur;
+import java.util.ArrayList;
 
 
 public class Constants {
+    /* ----- Serveur ----- */
+    public static final int nbMaxPlayer = 4; // Nombre maximum de joueur
+    public static final int port = 80 ;
+    public static final String ip = "127.0.0.1" ;
+
     /* ----- MAP ----- */
-    public static final int nbChunk = 3; // Nombre de chunk sur une ligne
+    public static final int nbChunk = 5; // Nombre de chunk sur une ligne
     public static final float unit = 1;
     public static final int unitInChunk = 10;
     public static final float lengthMap = unit * unitInChunk * nbChunk;
@@ -32,8 +38,8 @@ public class Constants {
     public static final double ttlBullet = 5 ;
 
     // Dimension
-    public static final float widthTank = 1 * unit ;
-    public static final float heightTank = 2 * unit ;
+    public static final float widthTank = 2 * unit ;
+    public static final float heightTank = 3 * unit ;
     public static final float radiusBullet = 0.5f * unit ;
     public static final double halfDiagonal = Math.sqrt((Constants.widthTank * Constants.widthTank) + (Constants.heightTank * Constants.heightTank)) / 2;
     
@@ -117,5 +123,52 @@ public class Constants {
     }
 
 
-    
+
+
+    public static ArrayList<Integer> getNeighbours(int index) {
+        ArrayList<Integer> neighbours = new ArrayList<>();
+        neighbours.add(index); 
+
+        int width = Constants.nbChunk;
+        int height = Constants.nbChunk;
+
+        int x = index % width;
+        int y = index / height;
+
+        for (int dy = -1; dy <= 1; dy++) {
+            for (int dx = -1; dx <= 1; dx++) {
+
+                if (dx == 0 && dy == 0) continue; // skip la case centrale
+
+                int nx = x + dx;
+                int ny = y + dy;
+
+                // Vérifie qu'on est dans la grille
+                if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                    int neighbourIndex = ny * width + nx;
+                    neighbours.add(neighbourIndex);
+                }
+            }
+        }
+
+        return neighbours;
+    }
+
+
+    public static void main(String[] args) {
+        int c = 0;
+        for(int i=0; i<Constants.nbChunk; i++){
+            for(int j=0; j<Constants.nbChunk; j++){
+                System.out.print(c);
+                System.out.print(" ");
+                c++;
+            }
+            System.out.println("");
+        }
+        // Exemple d'utilisation de la méthode getNeighbours
+        int index = 0; // Index de la case centrale
+        ArrayList<Integer> neighbours = Constants.getNeighbours(index);
+        System.out.println("Les voisins de l'index " + index + " sont : " + neighbours);
+            
+    }
 }

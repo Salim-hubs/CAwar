@@ -14,7 +14,7 @@ public class MultithreadedGame {
         HashMap<Integer, ArrayList<Coordinate>> obstacleMap = map.getObstacleMap();
 
         // Initialisation des points de spawn
-        ArrayList<Coordinate> spawnPoints = map.findSpawnPoint(8);
+        ArrayList<Coordinate> spawnPoints = map.findSpawnPoint(2);
 
         // Initialisation de GameState
         GameState gameState = new GameState(obstacleMap);
@@ -40,14 +40,22 @@ public class MultithreadedGame {
                 while (true) {
                     // Vérifie si la touche "P" est pressée
                     if (test.getPressedKeys().contains("P")) {
+                        System.out.println("Touche 'P' détectée."); // Debug: Vérifie si la touche est détectée
+
                         // Récupération des inputs
                         ArrayList<KeyTimePair> inputs = new ArrayList<>(test.getKeyTimePairs());
 
                         // Processus de simulation pour le tank
-                        gameState.process(tank, inputs);
+                        String json = gameState.process(tank, inputs);
+
+                        if (json != null && !json.isEmpty()) {
+                            System.out.println("JSON généré : " + json); // Debug: Affiche le JSON généré
+                        } else {
+                            System.out.println("Aucun JSON généré ou JSON vide."); // Debug: Indique que le JSON est vide ou nul
+                        }
 
                         // Affichage de la carte en tableau 2D
-                        if(tank.getId() == 1)
+                        if (tank.getId() == 1)
                             printMapWithTanksAndObstacles(map, tanks);
                     }
 
@@ -84,7 +92,7 @@ public class MultithreadedGame {
         // Placement des obstacles
         for (ArrayList<Coordinate> obstacleList : map.getObstacleMap().values()) {
             for (Coordinate coord : obstacleList) {
-                grid[(int) coord.getY()][(int) coord.getX()] = '9'; // '9' représente un obstacle
+                grid[(int) coord.getY()][(int) coord.getX()] = '0'; // 'i' représente un obstacle
             }
         }
 
