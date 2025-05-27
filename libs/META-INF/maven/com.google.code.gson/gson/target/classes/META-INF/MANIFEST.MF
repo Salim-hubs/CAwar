@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1744786018136
+Bundle-Description: Gson JSON library
+Bundle-Developers: google;organization=Google;organizationUrl="https:/
+ /www.google.com"
+Bundle-DocURL: https://github.com/google/gson/gson
+Bundle-License: "Apache-2.0";link="https://www.apache.org/licenses/LIC
+ ENSE-2.0.txt"
+Bundle-ManifestVersion: 2
+Bundle-Name: Gson
+Bundle-SCM: url="https://github.com/google/gson/gson/",connection="scm
+ :git:https://github.com/google/gson.git/gson",developer-connection="s
+ cm:git:git@github.com:google/gson.git/gson",tag="gson-parent-2.10.1"
+Bundle-SymbolicName: gson
+Bundle-Version: 2.10.1
+Created-By: 23.0.1 (Oracle Corporation)
+Tool: Bnd-6.4.0.202211291949
+
