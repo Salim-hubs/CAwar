@@ -112,12 +112,14 @@ public class GameState {
 
             int chunk = Constants.chunkFromCoord(Bullet0.getPosition());
             ArrayList<Coordinate> obstacles = this.obstacleMap.get(chunk);
-            for (Coordinate o : obstacles) {
-                if (Hitbox.rectanglesCircleCollide(
-                                o, Constants.unit, Constants.unit, 0,
-                                Bullet0.getPosition(), Constants.radiusBullet
-                        )) {
-                    T0.deleteBullet(Bullet0);
+            if (obstacles != null && !obstacles.isEmpty()) {
+                for (Coordinate o : obstacles) {
+                    if (Hitbox.rectanglesCircleCollide(
+                                    o, Constants.unit, Constants.unit, 0,
+                                    Bullet0.getPosition(), Constants.radiusBullet
+                            )) {
+                        T0.deleteBullet(Bullet0);
+                    }
                 }
             }
 

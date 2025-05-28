@@ -132,6 +132,7 @@ public class Tank {
     public void respawn() {
         this.setPosition(this.spawnPoint) ;
         this.atomHp.setAngle(Constants.healthTank);
+        this.setAngle(0);
     }
     public int getId() {
         return this.id ;

@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Constants {
     /* ----- Serveur ----- */
-    public static final int nbMaxPlayer = 2; // Nombre maximum de joueur
+    public static final int nbMaxPlayer = 10000; // Nombre maximum de joueur
     public static final int port = 80 ;
     public static final String ip = "127.0.0.1" ;
 
     /* ----- MAP ----- */
-    public static final int nbChunk = 150;
+    public static final int nbChunk = 20;
     public static final float unit = 1;
     public static final int unitInChunk = 10; 
     public static final float lengthMap = unit * unitInChunk * nbChunk;
-    public static final float percentObstacleTheoric = 0.05f;
+    public static final float percentObstacleTheoric = 0.025f;
     public static final float percentObstacle = (float) (
     (percentObstacleTheoric * Math.pow(nbChunk * unitInChunk, 2)) / 
     (Math.pow(unitInChunk - 2, 2) * Math.pow(nbChunk, 2)) 

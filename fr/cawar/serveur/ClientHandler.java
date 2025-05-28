@@ -187,6 +187,7 @@ public class ClientHandler extends Thread {
 
 
                 String jsonDataServer = this.gamestate.process(currentTank, key_time);
+                System.out.println("📤 Envoi des données au client : " + jsonDataServer);
                 Serveur.sendMessage(jsonDataServer, this);
             }
         } catch (Exception e) {

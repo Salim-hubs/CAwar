@@ -31,6 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
                 map.displayObstacleList();
                 map.displayMapData(); // Affiche la carte générée
             }
+            map.displayPercentObstacle();
             this.gamestate = new GameState(obstacleMap);
             this.spawnPoints = map.findSpawnPoint(Constants.nbMaxPlayer);
             this.jsonObstacles = JsonWriter.hashMapToJson(obstacleMap);
@@ -101,6 +102,7 @@ import java.util.concurrent.atomic.AtomicInteger;
                 // Ajout du tank a l'état du jeu
 
                 String initPacket = JsonWriter.initPacket(currentTank.getId(), this.jsonObstacles); // Crée le paquet d'initialisation
+                // System.err.println("Paquet d'initialisation envoyé : " + initPacket);
                 sendMessage(initPacket, client); // Envoie le paquet d'initialisation au client
             
             } else {

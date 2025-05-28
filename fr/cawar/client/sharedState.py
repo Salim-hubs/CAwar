@@ -143,7 +143,7 @@ class ClientGame:
 
                 try:
                     self.sock.sendall((json_data + "\n").encode('utf-8'))
-                    # print("Envoi JSON :", json_data)
+                    print("Envoi JSON :", json_data)
                 except Exception as e:
                     print("❌ Erreur d’envoi :", e)
 
@@ -212,7 +212,7 @@ class ClientGame:
         TANK_IMAGE = pygame.image.load("images/tankbody.png").convert_alpha()
         TANK_IMAGE = pygame.transform.rotate(TANK_IMAGE, 90)
         TANK_IMAGE = pygame.transform.scale(TANK_IMAGE, (scale_factor * 3, scale_factor * 2))
-        FLOOR_IMAGE = pygame.image.load("images/floorWhite.png").convert_alpha()
+        FLOOR_IMAGE = pygame.image.load("images/floor1.png").convert_alpha()
         FLOOR_IMAGE = pygame.transform.scale(FLOOR_IMAGE, (100, 100))
 
         while self.running:
@@ -263,6 +263,14 @@ class ClientGame:
             self.draw_tanks(screen, tanks, offset, TANK_IMAGE)
             self.draw_bullets(screen, bullets, offset)
             # print("Tanks :", self.id)
+
+            # Affichage des coordonnées du tank en haut à droite
+            if player_tank:
+                font = pygame.font.SysFont(None, 28)
+                pos_text = f"({player_tank['position']['x']:.2f}, {player_tank['position']['y']:.2f})"
+                text_surf = font.render(pos_text, True, (238,130,238))
+                text_rect = text_surf.get_rect(topright=(SCREEN_WIDTH - 10, 10))
+                screen.blit(text_surf, text_rect)
 
             pygame.display.flip()
             clock.tick(60)

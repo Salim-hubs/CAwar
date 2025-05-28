@@ -189,8 +189,7 @@ public class Map {
             }
         }
         percent = percent/(this.length*this.length) ;
-        System.out.print("Pourcentage d'obstacles : ");
-        System.out.print(percent);
+        System.out.print("Pourcentage d'obstacles : " + percent*100 + "%\n");
     }
 
     // Fonction pour afficher la liste des points de spawn
